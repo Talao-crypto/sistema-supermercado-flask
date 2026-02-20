@@ -1,0 +1,40 @@
+produtos:
+{
+  "nome": "Arroz",
+  "preco": 24.90,
+  "estoque": 150,
+  "categoria": "Alimentos"
+}
+
+pessoa:
+{
+  "nome": "Carlos",
+  "senha": "123",
+  "tipo": "admin"
+}
+
+
+ADMIN:
+1 - Criar produto
+2 - Listar produtos
+3 - Atualizar estoque
+4 - Atualizar preço
+5 - Remover produto
+6 - Relatório
+7 - Sair
+
+
+funcionario padrão:
+1 - Listar produtos
+2 - Atualizar estoque
+3 - Sair
+
+
+
+SEGURANÇA:
+VALIDAR O LOGIN DENTRO DAS FUNÇÕES PARA A PESSOA NAO CHAMAR DIRETAMENTE E TER ACESSO A ESTA FUNÇÃO 
+
+
+evoluçaõ projeto: 
+
+API FastAPI

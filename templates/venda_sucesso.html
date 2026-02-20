@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Venda Realizada</title>
+</head>
+<body>
+
+<h2>Venda realizada com sucesso!</h2>
+
+<p>Produto: {{ produto }}</p>
+<p>Quantidade: {{ quantidade }}</p>
+<p>Total pago: R$ {{ "%.2f"|format(total) }}</p>
+
+<br>
+<a href="/admin">Voltar</a>
+
+</body>
+</html>

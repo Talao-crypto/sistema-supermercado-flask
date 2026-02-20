@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Painel Funcionário</h1>
+<a href="/logout">Sair</a>
+
+<table border="1">
+<tr>
+    <th>Nome</th>
+    <th>Preço</th>
+    <th>Estoque</th>
+    <th>Categoria</th>
+    <th>Atualizar Estoque</th>
+    <th>Venda</th>
+</tr>
+
+{% for p in produtos %}
+<tr>
+    <td>{{ p.nome }}</td>
+    <td>{{ p.preco }}</td>
+    <td>{{ p.estoque }}</td>
+    <td>{{ p.categoria }}</td>
+
+    <td>
+        <form method="POST" action="/atualizar_estoque/{{ p._id }}">
+            <input type="number" name="estoque" required>
+            <button type="submit">OK</button>
+        </form>
+    </td>
+
+    <td>
+        <form method="POST" action="/vender/{{ p._id }}">
+            <input type="number" name="quantidade" min="1" required>
+            <button type="submit">Vender</button>
+        </form>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+</body>
+</html>

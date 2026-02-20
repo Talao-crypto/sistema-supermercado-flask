@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relatório</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Relatório de Vendas</h1>
+
+<p><strong>Total faturado:</strong> R$ {{ "%.2f"|format(total) }}</p>
+<p><strong>Total de vendas:</strong> {{ quantidade }}</p>
+<p><strong>Produto mais vendido:</strong> {{ produto_top }}</p>
+<p><strong>Vendedor com maior faturamento:</strong> {{ vendedor_top }}</p>
+
+<br>
+<a href="/admin">Voltar</a>
+
+</body>
+</html>

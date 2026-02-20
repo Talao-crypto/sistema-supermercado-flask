@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Produtos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Lista de Produtos</h1>
+
+<!-- FORM CRIAR PRODUTO (apenas admin) -->
+{% if tipo == "admin" %}
+<h2>Criar Novo Produto</h2>
+
+<form action="/criar_produto" method="POST">
+    <input type="text" name="nome" placeholder="Nome" required>
+    <input type="number" step="0.01" name="preco" placeholder="Preço" required>
+    <input type="number" name="estoque" placeholder="Estoque" required>
+    <input type="text" name="categoria" placeholder="Categoria" required>
+    <button type="submit">Criar Produto</button>
+</form>
+
+<hr>
+{% endif %}
+
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Estoque</th>
+        <th>Categoria</th>
+        <th>Venda</th>
+
+        {% if tipo == "admin" %}
+            <th>Ações</th>
+        {% endif %}
+    </tr>
+
+    {% for produto in produtos %}
+    <tr>
+
+        <td>{{ produto.nome }}</td>
+        <td>R$ {{ "%.2f"|format(produto.preco) }}</td>
+
+        <!-- ESTOQUE COLORIDO -->
+        {% if produto.estoque == 0 %}
+            <td class="vermelho">{{ produto.estoque }}</td>
+        {% elif produto.estoque < 10 %}
+            <td class="amarelo">{{ produto.estoque }}</td>
+        {% else %}
+            <td class="verde">{{ produto.estoque }}</td>
+        {% endif %}
+
+        <td>{{ produto.categoria }}</td>
+
+        <!-- VENDA -->
+        <td>
+            <form action="/vender/{{ produto.nome }}" method="POST" style="display:inline;">
+                <input type="number" name="quantidade" min="1" style="width:60px;" required>
+                <button type="submit">Vender</button>
+            </form>
+        </td>
+
+        <!-- REMOVER (ADMIN) -->
+        {% if tipo == "admin" %}
+        <td>
+            <form action="/remover/{{ produto.nome }}" method="POST" style="display:inline;">
+                <button type="submit"
+                    onclick="return confirm('Tem certeza que deseja remover este produto?')">
+                    Remover
+                </button>
+            </form>
+        </td>
+        {% endif %}
+
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="/logout">Sair</a>
+
+</body>
+</html>

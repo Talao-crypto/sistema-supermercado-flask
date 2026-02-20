@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Painel Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+<h1>Painel ADMIN</h1>
+
+<a href="/usuarios"> Gerenciar Usuários</a>
+<a href="/historico"> Histórico</a>
+<a href="/logout"> Sair</a>
+
+<hr>
+
+<h2>Cadastrar Produto</h2>
+
+<form method="POST" action="/cadastrar_produto">
+    <input type="text" name="nome" placeholder="Nome" required>
+    <input type="number" step="0.01" name="preco" placeholder="Preço" required>
+    <input type="number" name="estoque" placeholder="Estoque" required>
+    <input type="text" name="categoria" placeholder="Categoria" required>
+    <button type="submit">Cadastrar</button>
+</form>
+
+<hr>
+
+<h2>Produtos</h2>
+
+<table>
+<tr>
+    <th>Nome</th>
+    <th>Preço</th>
+    <th>Estoque</th>
+    <th>Categoria</th>
+    <th>Estoque</th>
+    <th>Preço</th>
+    <th>Venda</th>
+    <th>Remover</th>
+</tr>
+
+{% for p in produtos %}
+<tr>
+    <td>{{ p.nome }}</td>
+    <td>R$ {{ "%.2f"|format(p.preco) }}</td>
+
+    {% if p.estoque == 0 %}
+        <td class="vermelho">{{ p.estoque }}</td>
+    {% elif p.estoque < 10 %}
+        <td class="amarelo">{{ p.estoque }}</td>
+    {% else %}
+        <td class="verde">{{ p.estoque }}</td>
+    {% endif %}
+
+    <td>{{ p.categoria }}</td>
+
+    <td>
+        <form method="POST" action="/atualizar_estoque/{{ p._id }}">
+            <input type="number" name="estoque" required>
+            <button type="submit">OK</button>
+        </form>
+    </td>
+
+    <td>
+        <form method="POST" action="/atualizar_preco/{{ p._id }}">
+            <input type="number" step="0.01" name="preco" required>
+            <button type="submit">OK</button>
+        </form>
+    </td>
+
+    <td>
+        <form method="POST" action="/vender/{{ p._id }}">
+            <input type="number" name="quantidade" min="1" required>
+            <button type="submit">Vender</button>
+        </form>
+    </td>
+
+    <td>
+        <a href="/remover/{{ p._id }}">❌</a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+</div>
+
+</body>
+</html>

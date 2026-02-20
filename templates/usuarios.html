@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Gerenciar Usuários</h1>
+
+<a href="/admin">Voltar</a>
+<hr>
+
+<h2>Criar Usuário</h2>
+
+<form method="POST" action="/criar_usuario">
+    Nome: <input type="text" name="nome" required>
+    Senha: <input type="password" name="senha" required>
+    Tipo:
+    <select name="tipo" required>
+        <option value="admin">Admin</option>
+        <option value="funcionario">Funcionário</option>
+    </select>
+    <button type="submit">Criar</button>
+</form>
+
+<hr>
+
+<h2>Lista de Usuários</h2>
+
+<table border="1">
+<tr>
+    <th>Nome</th>
+    <th>Tipo</th>
+    <th>Remover</th>
+</tr>
+
+{% for u in usuarios_lista %}
+<tr>
+    <td>{{ u.nome }}</td>
+    <td>{{ u.tipo }}</td>
+    <td>
+        <a href="/remover_usuario/{{ u._id }}">❌</a>
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>

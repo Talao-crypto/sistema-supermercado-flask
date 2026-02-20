@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Histórico de Vendas</title>
+</head>
+<body>
+
+<h1>Histórico de Vendas</h1>
+
+<table border="1">
+<tr>
+    <th>Produto</th>
+    <th>Quantidade</th>
+    <th>Total</th>
+    <th>Vendedor</th>
+    <th>Data</th>
+</tr>
+
+{% for v in vendas %}
+<tr>
+    <td>{{ v.produto }}</td>
+    <td>{{ v.quantidade }}</td>
+    <td>R$ {{ "%.2f"|format(v.total) }}</td>
+    <td>{{ v.vendedor }}</td>
+    <td>{{ v.data }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<br>
+<a href="/admin">Voltar</a>
+
+</body>
+</html>
